@@ -1,2 +1,106 @@
 # better-stack
 Better-stack Hello There
+
+Steps:
+1. First I define a method with one parameter 'columnName'.
+2. Declare a result variable with a starting value of 0
+3. Iterate over the length of the string
+4. Read the character at the given position
+
+
+
+
+function excelColumnToNumber(columnName) {
+  let result = 0;
+  for (let i = 0; i < columnName.length; i++) {
+    const char = columnName[i];
+    const charValue = char.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+    result = result * 26 + charValue;
+  }
+  return result - 1;
+}
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Column Converter</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Excel Column to Integer Better Stack</h1>
+
+        <div class="mb-4">
+            <label for="columnInput" class="block text-gray-700 text-sm font-semibold mb-2">
+                Enter Excel Column Name:
+            </label>
+            <input
+                type="text"
+                id="columnInput"
+                class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                placeholder="e.g., A, B, AA, ABC"
+            >
+        </div>
+
+        <button id="convertButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-300 ease-in-out transform hover:scale-105">
+            Give me the integer !
+        </button>
+
+        <div id="resultDisplay" class="mt-6 p-4 bg-blue-100 border border-blue-300 text-blue-800 rounded-lg text-center text-lg font-medium hidden">
+        </div>
+    </div>
+
+    <script>
+        function excelColumnToInteger(columnName) {
+            let result = 0;
+            for (let i = 0; i < columnName.length; i++) {
+                const char = columnName[i];
+                const charValue = char.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+                result = result * 26 + charValue;
+            }
+            return result - 1;
+        }
+
+        const columnInput = document.getElementById('columnInput');
+        const convertButton = document.getElementById('convertButton');
+        const resultDisplay = document.getElementById('resultDisplay');
+
+        convertButton.addEventListener('click', () => {
+            const columnName = columnInput.value.trim();
+            if (!columnName) {
+                resultDisplay.textContent = "Please enter a column name.";
+                resultDisplay.classList.remove('hidden', 'bg-blue-100', 'border-blue-300', 'text-blue-800');
+                resultDisplay.classList.add('bg-red-100', 'border-red-300', 'text-red-800');
+                return;
+            }
+
+            const integerValue = excelColumnToInteger(columnName);
+            resultDisplay.textContent = `Column "${columnName.toUpperCase()}" corresponds to integer: ${integerValue}`;
+            resultDisplay.classList.remove('hidden', 'bg-red-100', 'border-red-300', 'text-red-800');
+            resultDisplay.classList.add('bg-blue-100', 'border-blue-300', 'text-blue-800');
+        });
+
+        columnInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                convertButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
+```
