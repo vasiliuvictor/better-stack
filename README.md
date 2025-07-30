@@ -9,7 +9,7 @@ Steps:
 
 
 
-
+```
 function excelColumnToNumber(columnName) {
   let result = 0;
   for (let i = 0; i < columnName.length; i++) {
@@ -19,6 +19,8 @@ function excelColumnToNumber(columnName) {
   }
   return result - 1;
 }
+
+```
 
 
 ```html
@@ -103,4 +105,3 @@ function excelColumnToNumber(columnName) {
     </script>
 </body>
 </html>
-```
